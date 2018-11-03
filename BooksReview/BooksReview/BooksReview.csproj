@@ -215,6 +215,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Genere.cs" />
+    <Compile Include="Controllers\GeneresController.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelsMapping.cs" />
@@ -281,6 +282,11 @@
     <Content Include="Views\Users\FailedLogin.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Users\Stats.cshtml" />
+    <Content Include="Views\Generes\Create.cshtml" />
+    <Content Include="Views\Generes\Delete.cshtml" />
+    <Content Include="Views\Generes\Details.cshtml" />
+    <Content Include="Views\Generes\Edit.cshtml" />
+    <Content Include="Views\Generes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
