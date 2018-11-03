@@ -13,7 +13,7 @@
     <link rel="icon" href="../../Content/Books.png">
     <link href="~/Content/Site.css" type="text/css" rel="stylesheet" />
     <link href="~/Content/hover.css" type="text/css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
@@ -25,7 +25,7 @@
             <ul class="navbar-nav bd-navbar-nav flex-row">
                 <li class="nav-item custom-nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link custom-nav-link" })</li>
                 <li class="nav-item custom-nav-link">@Html.ActionLink("Reviews", "Index", "Reviews", new { area = "" }, new { @class = "nav-link custom-nav-link" })</li>
-                <li class="nav-item custom-nav-link">@Html.ActionLink("Movies", "Index", "Movies", new { area = "" }, new { @class = "nav-link custom-nav-link" })</li>
+                <li class="nav-item custom-nav-link">@Html.ActionLink("Books", "Index", "Books", new { area = "" }, new { @class = "nav-link custom-nav-link" })</li>
                 @if (user != null && user.IsAdmin)
                 {
                     <li class="nav-item custom-nav-link">@Html.ActionLink("Generes", "Index", "Generes", new { area = "" }, new { @class = "nav-link custom-nav-link" })</li>
@@ -41,19 +41,19 @@
         @Html.Partial("_LoginPartial")
 
     </header>
-    @*@using (Html.BeginForm("Search", "Reviews", FormMethod.Get))
+    @using (Html.BeginForm("Search", "Reviews", FormMethod.Get))
     {
         <div class="main-search">
             <div style="width: 50%;">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="movieName" style="height:48px; margin-right: 2%" placeholder="Search reviews by movie name...">
+                    <input type="text" class="form-control" name="bookName" style="height:48px; margin-right: 2%" placeholder="Search reviews by book name...">
                     <span class="input-group-btn">
                         <button class="btn btn-outline-light btn-lg" type="submit">Search!</button>
                     </span>
                 </div>
             </div>
         </div>
-    }*@
+    }
     <div class="container" style="margin-bottom: 45px;">
         @RenderBody()
 
@@ -64,7 +64,7 @@
             <p>getting info...</p>
         </div>
         <div>
-            <p>© 2018 - Movies Reviews </p>
+            <p>© 2018 - Books Reviews </p>
         </div>
     </footer>
 
