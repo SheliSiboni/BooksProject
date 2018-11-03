@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BooksReview.Models;
+using BooksReview.Models.ViewModels;
 
 namespace BooksReview.Controllers
 {
@@ -18,6 +19,18 @@ namespace BooksReview.Controllers
         public ActionResult Index()
         {
             return View(db.Users.ToList());
+        }
+
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult FailedLogin()
+        {
+            return View();
         }
 
         // GET: Users/Details/5
@@ -48,14 +61,24 @@ namespace BooksReview.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Gender,Username,FirstName,LastName,Password,IsAdmin")] User user)
         {
-            if (ModelState.IsValid)
+            var oRegisterRedirect = SaveUser(user, RedirectToAction("Index", "Home"));
+
+            Session.Add("User", user);
+
+            return oRegisterRedirect;
+        }
+
+        private ActionResult SaveUser(User user, RedirectToRouteResult redirectOnSucess)
+        {
+            if (!ModelState.IsValid || db.Users.Any(x => x.Username == user.Username))
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(user);
             }
 
-            return View(user);
+            db.Users.Add(user);
+            db.SaveChanges();
+
+            return redirectOnSucess;
         }
 
         // GET: Users/Edit/5
@@ -104,6 +127,31 @@ namespace BooksReview.Controllers
             return View(user);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult Login([Bind(Include = "Username,Password")] User loginCredentials)
+        {
+            var user = db.Users.SingleOrDefault(u => u.Username.Equals(loginCredentials.Username) && u.Password.Equals(loginCredentials.Password));
+
+            if (user == null)
+            {
+                return RedirectToAction("FailedLogin", "Users");
+            }
+
+            Session.Add("User", user);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -113,6 +161,43 @@ namespace BooksReview.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetGroupByGender()
+        {
+            var genderToUsers = db.Users.GroupBy(x => x.Gender, user => user, (gender, users) => new
+            {
+                Name = gender.ToString(),
+                Count = users.Count()
+            });
+
+            return Json(genderToUsers, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public ActionResult Stats()
+        {
+            var userReviewsViewModels = (from user in db.Users
+                                         join review in db.Reviews on user.Id equals review.User.Id
+                                         select new
+                                         {
+                                             Id = user.Id,
+                                             UserName = user.Username,
+                                             FirstName = user.FirstName,
+                                             LastName = user.LastName,
+                                             Review = review
+                                         }).GroupBy(x => x.Id).ToList()
+                .Select(x => new UserReviewsViewModel
+                {
+                    UserName = x.First().UserName,
+                    FirstName = x.First().FirstName,
+                    LastName = x.First().LastName,
+                    Reviews = x.Select(y => y.Review)
+                });
+
+            return View(userReviewsViewModels);
         }
 
         protected override void Dispose(bool disposing)

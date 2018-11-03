@@ -1,0 +1,27 @@
+﻿
+@{
+    BooksReview.Models.User user = ((BooksReview.Models.User)Session["User"]);
+}
+
+<ul class="navbar-nav bd-navbar-nav flex-row navbar-right">
+    @if (user == null)
+    {
+        <li class="nav-item">
+            @Html.ActionLink("Register", "Create", "Users", new { area = "" }, new { @class = "btn btn-primary" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Login", "Login", "Users", new { area = "" }, new { @class = "btn btn-primary" })
+        </li>
+    }
+    else
+    {
+        <li class="nav-item" style="margin-top: 6px; margin-right: 20px">
+            <a style="color: black !important; font-size: 18px; pointer-events: none;" href="#">
+                Welcome @(user.FirstName + " " + user.LastName)
+            </a>
+        </li>
+        <li class="nav-item" style="margin-right: 10px">
+            @Html.ActionLink("Log Out", "Logout", "Users", new { area = "" }, new { @class = "nav-link" })
+        </li>
+    }
+</ul>

@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Delete";
 }
+@{
+    ViewBag.Title = "Delete";
+}
 
 <h2>Delete</h2>
 
@@ -14,59 +17,49 @@
         <dt>
             @Html.DisplayNameFor(model => model.Gender)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Gender)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Username)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Username)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Password)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Password)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.IsAdmin)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.IsAdmin)
         </dd>
-
     </dl>
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-info" />
+            <button type="button" class="btn" style="border-radius: 15px 5px;">
+                @Html.ActionLink("Back to List", "Index")
+            </button>
         </div>
     }
 </div>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container-fluid">
+    <div class="login card">
+        @using (Html.BeginForm("Login", "Users"))
+        {
+            @Html.AntiForgeryToken()
+            <h4 class="card-title">Login</h4>
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="Username">
+                <br />
+                <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <div style="display:flex; justify-content:flex-end">
+                @Html.ActionLink("Register", "Create", "Users", new { area = "" }, new { @class = "btn" })
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px">Sign in</button>
+            </div>
+        }
+    </div>
+
+</div>

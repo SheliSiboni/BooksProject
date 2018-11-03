@@ -1,24 +1,115 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html,body {
+    background: #f1f1f1;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.logo-border {
+    background-color: #F77B00 !important;
+    border-radius: 100%;
+}
+
+.logo {
+    width: 10rem;
+    transition: all 0.3s ease;
+    width: 90px;
+    height: 70px;
+}
+
+.logo:hover {
+    -webkit-transform: rotateZ(-30deg);
+    -ms-transform: rotateZ(-30deg);
+    transform: rotateZ(-30deg);
+
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.welcome {
+    text-shadow: 0px 0px 15px #1968b3;
+    color: #1081f0;
+}
+
+@font-face {
+    src: url("/fonts/glyphicons-halflings-regular.woff");
+}
+
+.reviews-navbar {
+    min-height: 65px;
+    background: white;
+    border-top: 2px solid orange;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.45);
+}
+
+.reviews-navbar .navbar-nav .nav-item {
+    padding-right: 1rem;
+}
+
+.aligned-to-center-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-search {
+    height: 150px;
+    width: 100%;
+    color: #FFF;
+    display: flex;
+    background-color: #98B9F2;
+    background-position: right center,center center;
+    background-repeat: no-repeat,no-repeat;
+    font-size: 18px;
+    margin-bottom: 25px;
+    margin-top: 65px;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-search input {
+    border: 1px solid white;
+}
+
+.main-search .btn.btn-outline-light:hover {
+    background-color: #0000006e;
+}
+
+.sticky-bottom {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    background: #3e3e3e;
+    justify-content: space-evenly;
+    height: 45px;
+    align-items: flex-end;
+    color: white;
+}
+
+#temperatureDiv {
+    display: flex;
+}
+
+.login {
+    padding: 2em;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.custom-nav-bar {
+    background-color: #306bac !important;
+}
+
+.custom-nav-link {
+    color: black !important;
+}
+
+
+.custom-nav-link :hover {
+    text-shadow: 1px 0.5px !important;
+    color: black !important;
+    font-size: 1.1em;
 }
