@@ -1,0 +1,72 @@
+﻿
+@using BooksReview.Models
+@model IEnumerable<Book>
+
+@{
+    ViewBag.Title = "Search Results";
+    var user = (User)Session["User"];
+}
+
+@using (Html.BeginForm("Search", "Books", FormMethod.Get))
+{
+    <aside style="margin: 20px 0">Enter up to 2 search parameters and click the "Search" button below</aside>
+
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <div class="control-label">Name</div>
+                <input type="text" name="name" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+                <div class="control-label">Genere</div>
+                <input type="text" name="genere" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-2">
+                <div class="col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" style="position: absolute; top: 20px" />
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <hr />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Genere.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genere.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <img src='@Html.DisplayFor(modelItem => item.ImageUrl)' style="height:50px;width:100px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+    </tr>
+    }
+</table>
