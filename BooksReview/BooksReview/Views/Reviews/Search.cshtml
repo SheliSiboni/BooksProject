@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+@using BooksReview.Models
+@model IEnumerable<Review>
+
+@{
+    ViewBag.Title = "Search Results";
+    var user = (User)Session["User"];
+}
+
+@using (Html.BeginForm("Search", "Reviews", FormMethod.Get))
+{
+    <aside style="margin: 20px 0">Enter up to 3 search parameters and click the "Search" button below</aside>
+
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <div class="control-label">Title</div>
+                <input type="text" name="title" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+                <div class="control-label">Content</div>
+                <input type="text" name="content" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+                <div class="control-label">Book</div>
+                <input type="text" name="bookName" class="form-control" />
+            </div>
+            <div class="form-group col-md-2">
+                <div class="col-md-10">
+                    <input type="submit" value="Search" class="btn btn-default" style="position: absolute; top: 20px" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                @if (user != null)
+                {
+                    Review recommendedReview = ViewBag.recommendedReview;
+
+                    if (recommendedReview != null)
+                    {
+                        <h6>Recommended just for you :)</h6>
+                        <p>Click here to see the most popular review in your favorite category</p>
+                        <a>@Html.ActionLink(recommendedReview.Title, "./RecommendedReviewDetails")</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="col-md-10">
+        @if (user != null)
+        {
+            <h6>There is no a review? Go ahead and add one!</h6>
+            <button type="button" class="btn" style="border-radius: 15px 5px">
+                @Html.ActionLink("Add a new Review", "Create", new { area = "" }, new { @class = "review-link" })
+            </button>
+        }
+    </div>
+
+    <hr />
+}
+@foreach (var review in Model)
+{
+    <section>
+        <article class="blogPost">
+            <div>
+                <div style="display: flex;color: #F77B00; font-size: 1.1rem; font-weight:500">
+                    <span>Book Name: @Html.DisplayFor(modelItem => review.Book.Name)</span>
+                </div>
+                <div>
+                    <span style="color: black;font-weight:400">@Html.DisplayFor(modelItem => review.Title)</span>
+                </div>
+                <a href="https://twitter.com/intent/tweet?screen_name=stackReviews&text=Read this review for @review.Title http://localhost:51259/Reviews/Details/@review.Id" class="twitter-mention-button" data-show-count="false">Tweet to stackReviews</a>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <span>Posted on @Html.DisplayFor(modelItem => review.CreationDate) by @Html.ActionLink(review.User.Username, "Details", "Users", new { id = review.User.Id }, new { @class = "review-link" }) - <b>@review.Comments.Count Comments</b></span>
+
+            <div style="column-count: 3; column-gap:40px; column-rule: 1px solid lightgrey;">
+                <span>  @Html.DisplayFor(modelItem => review.Content) </span>
+            </div>
+            <br />
+            @if (user != null && user.IsAdmin)
+            {
+                <div>
+                    @Html.ActionLink("Edit", "Edit", new { id = review.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details", new { id = review.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { id = review.Id }, new { @class = "btn btn-primary" })
+                </div>
+            }
+
+        </article>
+    </section>
+    <br />
+    <section id="comments">
+        <h5>Comments</h5>
+
+        @foreach (var comment in review.Comments)
+        {
+            <article>
+                <header>
+                    <span>By @comment.User.Username</span> at @comment.CreationDate
+                </header>
+                @comment.Content
+            </article>
+        }
+
+        @if (user != null)
+        {
+            using (Html.BeginForm("PostComment", "Reviews"))
+            {
+                <input type="hidden" name="userId" value="@user.Id" />
+                <input type="hidden" name="reviewID" value="@review.Id" />
+                <input type="text" name="content" placeholder="comment" style="margin: 10px 0" />
+                <input type="submit" value="Post" class="btn btn-default" />
+
+                <br />
+            }
+        }
+    </section>
+    <hr />
+}
+
+
+

@@ -124,6 +124,18 @@
         border-color: #e67300 !important;
     }
 
+.btn-default {
+    background: #F77B00 !important;
+    border-color: #F77B00 !important;
+    color:black;
+}
+
+    .btn-default:hover {
+        background-color: #e67300 !important;
+        border-color: #e67300 !important;
+        color: black;
+    }
+
 .review-btn {
     display: inline-block;
     font-weight: bold;
@@ -159,3 +171,4 @@ a.review-btn:hover{
     text-decoration: none !important;
     color: #e67300 !important;
 }
+
