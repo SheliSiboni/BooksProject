@@ -6,5 +6,5 @@ function weatherCallBack(WeatherData) {
     temp -= 273.15;
     var city = WeatherData.name;
 
-    document.getElementById('temperatureDiv').append("The Temperature in " + city + " is " + temp + "C degrees.");
+    document.getElementById('tempP').append(" " + temp + "C degrees.");
 };
