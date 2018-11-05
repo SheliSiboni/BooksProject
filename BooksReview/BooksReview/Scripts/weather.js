@@ -1,12 +1,10 @@
-﻿//weather.js
+﻿var apiCalls = 'http://api.openweathermap.org/data/2.5/weather?q=Tel' + " " + 'Aviv&appid=bdb3f76b0cb6e16136aec2410502dd16'
+$.getJSON(apiCalls, weatherCallBack)
 
-var weatherCallback = function (data) {
-    var wind = data.query.results.channel.wind;
-    var item = data.query.results.channel.item;
-    var text = item.condition.temp + " °C";
-    $("#temperatureDiv p").html(text);
+function weatherCallBack(WeatherData) {
+    var temp = WeatherData.main.temp;
+    temp -= 273.15;
+    var city = WeatherData.name;
+
+    document.getElementById('tempP').append(" " + temp + "C degrees.");
 };
-
-function updateTemperatureDiv(text) {
-    $("#temperatureDiv").append("<p>" + text + "</p>");
-}
