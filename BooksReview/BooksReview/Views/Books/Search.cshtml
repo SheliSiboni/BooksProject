@@ -67,6 +67,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Author)
         </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "review-link" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "review-link" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "review-link" })
+        </td>
     </tr>
     }
 </table>

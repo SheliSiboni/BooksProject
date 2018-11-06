@@ -6,7 +6,7 @@
 }
 
 
-@*<div class="row">
+<div class="row">
 
     @if (@Model.Id != 0)
     {
@@ -17,11 +17,12 @@
                     @Html.DisplayFor(model => model.Name)
                 </h4>
 
-                @Html.ActionLink("Details", "Details", "Books", new { id = Model.Id }, new { @class = "nav-link custom-nav-link btn btn-info" })
+                @Html.ActionLink("Details", "Details", "Books", new { id = Model.Id }, new { @class = "nav-link custom-nav-link btn btn-primary" })
             </div>
         </div>
         <img style="margin-top:3%; width:200px; height: 150px;" src='@Model.ImageUrl' />
     }
 
     <canvas id="jamalcanvs" style="color:red"> </canvas>
-</div>*@
+</div>
+

@@ -60,8 +60,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" })
-    <button type="button" class="btn" style="border-radius: 15px 5px;">
-        @Html.ActionLink("Back to List", "Index")
-    </button>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "review-link" })
+
 </p>

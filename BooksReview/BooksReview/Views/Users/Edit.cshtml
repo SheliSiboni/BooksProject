@@ -78,9 +78,9 @@
 
 <div>
     <div class="form-actions no-color">
-        <input type="submit" value="Save" class="btn btn-info" />
+        <input type="submit" value="Save" class="btn btn-primary" />
         <button type="button" class="btn" style="border-radius: 15px 5px;">
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "review-link" })
         </button>
     </div>
 </div>
