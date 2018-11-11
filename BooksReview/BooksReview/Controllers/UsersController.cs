@@ -158,15 +158,20 @@ namespace BooksReview.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
-            if (user.Reviews != null && user.Reviews.Count > 0)
-            {
-                ReviewsController reviews = new ReviewsController();
 
-                foreach (Review review in user.Reviews)
+            var userReviews = db.Reviews.Where(r => r.UserID == id);
+
+            foreach (Review review in userReviews)
+            {
+                if (review.Comments != null && review.Comments.Count > 0)
                 {
-                    reviews.DeleteConfirmed(review.Id);
+                    db.Comments.RemoveRange(review.Comments);
                 }
             }
+
+            db.Reviews.RemoveRange(userReviews);
+       
+
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");

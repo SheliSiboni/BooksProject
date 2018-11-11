@@ -115,6 +115,19 @@ namespace BooksReview.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Book book = db.Books.Find(id);
+            if (book.Reviews != null && book.Reviews.Count > 0)
+            {
+                foreach (Review review in book.Reviews)
+                {
+                    if (review.Comments != null && review.Comments.Count > 0)
+                    {
+                        db.Comments.RemoveRange(review.Comments);
+                    }   
+                }
+
+                db.Reviews.RemoveRange(book.Reviews);
+            }
+
             db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");
