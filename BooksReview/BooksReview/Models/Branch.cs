@@ -13,8 +13,11 @@ namespace BooksReview.Models
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Location")]
-        public string Location { get; set; }
+        [DisplayName("LatCoordinate")]
+        public double LatCoordinate { get; set; }
 
+        [Required]
+        [DisplayName("LatCoordinate")]
+        public double LngCoordinate { get; set; }
     }
 }

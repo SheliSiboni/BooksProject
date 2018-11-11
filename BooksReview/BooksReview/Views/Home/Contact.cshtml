@@ -3,27 +3,69 @@
     ViewBag.Title = "Contact Us";
 }
 
-
-<script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AglqlqQgF_dEaS3S7mR7g--ZYzo_Xfaqy0WS68UwWaisBsU0QREVDSmOPKY_yicD' async defer></script>
-<script>
-    locationArray = []
-</script>
-
 <h1>
     @ViewBag.Title
 </h1>
 
+<script>
+    var coordinateArray = [];
+</script>
 @foreach (var item in Model)
-{
-    <script>locationArray.push("@item.Location")</script>
-}
-    <div style="display: flex; justify-content: space-between;">
-        <div>
-            <strong>Owners: </strong> <br />
-            <a class="review-link" href="mailto:shelisiboni111@gmail.com">shelisiboni111@gmail.com</a><br />
-            <a class="review-link" href="mailto:amsteromer@gmail.com">amsteromer@gmail.com</a><br />
-            <a class="review-link" href="mailto:maayan101@gmail.com">maayan101@gmail.com</a><br />
-            <a class="review-link" href="mailto:idan.goshen@gmail.com">idan.goshen@gmail.com</a><br />
-        </div>
-    </div>
+    {
+        <script>
+        
+            var coordinate = { lat: @item.LatCoordinate, lng: @item.LngCoordinate};
+            coordinateArray.push(coordinate)
+        </script>
+    }
 
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Markers</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #map {
+            height: 350px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 50%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<div style="display: flex; justify-content: space-between;">
+    <div>
+        <strong>Owners: </strong> <br />
+        <a class="review-link" href="mailto:shelisiboni111@gmail.com">shelisiboni111@gmail.com</a><br />
+        <a class="review-link" href="mailto:amsteromer@gmail.com">amsteromer@gmail.com</a><br />
+        <a class="review-link" href="mailto:maayan101@gmail.com">maayan101@gmail.com</a><br />
+        <a class="review-link" href="mailto:idan.goshen@gmail.com">idan.goshen@gmail.com</a><br />
+    </div>
+</div>
+<div id="map"></div>
+<script>
+
+    function initMap() {
+        var myLatLng = { lat: 32.106723, lng: 34.863136 };
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: myLatLng
+        });
+
+        coordinateArray.forEach(function (coordinate) {
+            var marker = new google.maps.Marker({
+                position: coordinate,
+                map: map,
+                title: 'Hello World!'
+            });
+        })
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQwzlG8r2bP2YIj2HVajbPyD92kWWWSoM&callback=initMap">
+</script>
