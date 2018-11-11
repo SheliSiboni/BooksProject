@@ -28,9 +28,10 @@ namespace BooksReview.Controllers
 
         public ActionResult Contact()
         {
+            var Branches = db.Branches;
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(Branches.ToList());
         }
 
         public Book RecommendBook()

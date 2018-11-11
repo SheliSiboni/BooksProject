@@ -10,7 +10,7 @@ namespace BooksReview.Models
     {
         [Required]
         [DisplayName("Id")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DisplayName("Location")]

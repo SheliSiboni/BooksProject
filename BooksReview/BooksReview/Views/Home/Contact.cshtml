@@ -1,8 +1,8 @@
-﻿@{
+﻿@model IEnumerable<BooksReview.Models.Branch>
+@{
     ViewBag.Title = "Contact Us";
 }
 
-@model string
 
 <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AglqlqQgF_dEaS3S7mR7g--ZYzo_Xfaqy0WS68UwWaisBsU0QREVDSmOPKY_yicD' async defer></script>
 
@@ -10,13 +10,22 @@
 <h1>
     @ViewBag.Title
 </h1>
-<div style="display: flex; justify-content: space-between;">
-    <div>
-        <strong>Owners: </strong> <br />
-        <a class="review-link" href="mailto:shelisiboni111@gmail.com">shelisiboni111@gmail.com</a><br />
-        <a class="review-link" href="mailto:amsteromer@gmail.com">amsteromer@gmail.com</a><br />
-        <a class="review-link" href="mailto:maayan101@gmail.com">maayan101@gmail.com</a><br />
-        <a class="review-link" href="mailto:idan.goshen@gmail.com">idan.goshen@gmail.com</a><br />
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+    </tr>
+}
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <strong>Owners: </strong> <br />
+            <a class="review-link" href="mailto:shelisiboni111@gmail.com">shelisiboni111@gmail.com</a><br />
+            <a class="review-link" href="mailto:amsteromer@gmail.com">amsteromer@gmail.com</a><br />
+            <a class="review-link" href="mailto:maayan101@gmail.com">maayan101@gmail.com</a><br />
+            <a class="review-link" href="mailto:idan.goshen@gmail.com">idan.goshen@gmail.com</a><br />
+        </div>
     </div>
-</div>
 
