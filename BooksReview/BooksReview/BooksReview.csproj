@@ -207,6 +207,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
@@ -216,6 +217,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Genere.cs" />
@@ -232,6 +234,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\BooksReview.Models.BooksContext.mdf" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\books.png" />
     <Content Include="Content\book_canvas_1.jpg" />
@@ -299,7 +302,7 @@
     <Content Include="Views\Generes\Details.cshtml" />
     <Content Include="Views\Generes\Edit.cshtml" />
     <Content Include="Views\Generes\Index.cshtml" />
-	<Content Include="Views\Generes\Index.cshtml" />
+    <Content Include="Views\Generes\Index.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
@@ -332,9 +335,7 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

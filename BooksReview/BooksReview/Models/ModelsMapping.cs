@@ -11,11 +11,14 @@ namespace BooksReview.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Genere> Generes { get; set; }
         public DbSet<Book> Books{ get; set; }
+        public DbSet<Branch> Branches { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            Database.SetInitializer<BooksContext>(null);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
