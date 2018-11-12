@@ -74,7 +74,7 @@ namespace BooksReview.Controllers
                     int[][] dataset = new int[selectedGeneres.Length][];
 
                     Dictionary<int, int> mapper = new Dictionary<int, int>();
-                    Dictionary<int, int> mapperOpsite = new Dictionary<int, int>();
+                    Dictionary<int, int> mapperOpposite = new Dictionary<int, int>();
 
                     int counter = 0;
 
@@ -85,7 +85,7 @@ namespace BooksReview.Controllers
                         if (!mapper.ContainsKey(selectedGeneres[genereIndex]))
                         {
                             mapper[selectedGeneres[genereIndex]] = counter;
-                            mapperOpsite[counter] = selectedGeneres[genereIndex];
+                            mapperOpposite[counter] = selectedGeneres[genereIndex];
 
                             counter++;
                         }
@@ -99,7 +99,6 @@ namespace BooksReview.Controllers
                         mappedLabels[i] = mapper[selectedGeneres[i]];
                     }
 
-
                     var learner = new NaiveBayesLearning();
                     NaiveBayes nb = learner.Learn(dataset, mappedLabels);
 
@@ -107,7 +106,7 @@ namespace BooksReview.Controllers
 
                     int selectedGenereMapped = nb.Decide(prediction);
 
-                    int selectedIndex = mapperOpsite[selectedGenereMapped];
+                    int selectedIndex = mapperOpposite[selectedGenereMapped];
 
                     allBooksInGenere = db.Generes.First(x => x.Id == selectedIndex).Books;
 
