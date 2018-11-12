@@ -110,6 +110,25 @@ namespace BooksReview.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Genere genere = db.Generes.Find(id);
+
+            foreach (Book book in genere.Books)
+            {
+                if (book.Reviews != null && book.Reviews.Count > 0)
+                {
+                    foreach (Review review in book.Reviews)
+                    {
+                        if (review.Comments != null && review.Comments.Count > 0)
+                        {
+                            db.Comments.RemoveRange(review.Comments);
+                        }
+                    }
+
+                    db.Reviews.RemoveRange(book.Reviews);
+                }
+            }
+
+            db.Books.RemoveRange(genere.Books);            
+
             db.Generes.Remove(genere);
             db.SaveChanges();
             return RedirectToAction("Index");
